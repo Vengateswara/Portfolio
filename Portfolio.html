@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vengateswaran J. — Data Scientist &amp; GenAI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ECEEE7;
+    --paper-2:#E3E6DC;
+    --ink:#141B17;
+    --ink-soft:#4B554E;
+    --line:#C7CCBE;
+    --teal:#2C6E5F;
+    --amber:#C97A2B;
+    --white:#FBFBF8;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#12160F;
+      --paper-2:#191E15;
+      --ink:#ECEEE7;
+      --ink-soft:#A6AC9F;
+      --line:#31392C;
+      --teal:#5FBFA6;
+      --amber:#E29A50;
+      --white:#0E120C;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#12160F;
+    --paper-2:#191E15;
+    --ink:#ECEEE7;
+    --ink-soft:#A6AC9F;
+    --line:#31392C;
+    --teal:#5FBFA6;
+    --amber:#E29A50;
+    --white:#0E120C;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px));}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px;}
+  img{max-width:100%; display:block;}
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .brand{font-size:1rem; font-weight:600;}
+  .brand span{color:var(--teal);}
+  .navlinks{display:flex; gap:28px; font-size:0.92rem; overflow-x:auto;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft); white-space:nowrap;}
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--ink);}
+  .theme-btn{
+    border:1px solid var(--line); background:transparent; color:var(--ink);
+    border-radius:20px; padding:6px 14px; font-size:0.82rem; cursor:pointer;
+    font-family:'JetBrains Mono', monospace;
+  }
+  .theme-btn:hover{border-color:var(--teal); color:var(--teal);}
+
+  /* HERO */
+  .hero{padding:88px 0 72px; border-bottom:1px solid var(--line);}
+  .hero .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.82rem;
+    color:var(--teal);
+    margin-bottom:18px;
+    display:block;
+  }
+  .hero h1{font-size:clamp(1.9rem, 4.2vw, 3.1rem); line-height:1.15; max-width:22ch;}
+  .hero p.lede{
+    max-width:156ch; margin-top:22px; font-size:1.08rem; color:var(--ink-soft);
+  }
+  .hero-actions{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:2px; font-size:0.94rem; font-weight:500;
+    text-decoration:none; border:1px solid var(--ink);
+    transition:background .15s ease, color .15s ease;
+  }
+  .btn.primary{background:var(--ink); color:var(--paper);}
+  .btn.primary:hover{background:var(--teal); border-color:var(--teal); color:var(--white);}
+  .btn.ghost{background:transparent; color:var(--ink); border-color:var(--line);}
+  .btn.ghost:hover{border-color:var(--ink);}
+
+  .stat-row{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+    gap:0; margin-top:56px; border-top:1px solid var(--line);
+  }
+  .stat{padding:18px 0 0; border-right:1px solid var(--line);border-left:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat b{ 
+    font-family: sans-serif; font-size:1.3rem; display:block;
+  }
+  .stat span{font-size:0.82rem; color:var(--ink-soft);}
+
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:36px; gap:16px; flex-wrap:wrap;}
+  .section-head h2{font-size:1.7rem;}
+  .section-head .count{font-family:'JetBrains Mono', monospace; color:var(--ink-soft); font-size:0.85rem;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px;}
+  @media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:var(--ink-soft); max-width:62ch;}
+  .about-grid p + p{margin-top:14px;}
+  .fact-list{border-top:1px solid var(--line);}
+  .fact-list div{
+    display:flex; justify-content:space-between; gap:12px;
+    padding:12px 0; border-bottom:1px solid var(--line); font-size:0.92rem;
+  }
+  .fact-list div span:first-child{color:var(--ink-soft);}
+  .fact-list div span:last-child{text-align:right; font-family:'JetBrains Mono', monospace; font-size:0.85rem;}
+
+  /* SKILLS */
+  .skill-groups{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.skill-groups{grid-template-columns:1fr 1fr;}}
+  @media (max-width:480px){.skill-groups{grid-template-columns:1fr;}}
+  .skill-cell{background:var(--paper); padding:22px;}
+  .skill-cell h3{font-size:0.78rem; font-family:'JetBrains Mono', monospace; text-transform:none; color:var(--teal); margin-bottom:12px; font-weight:500;}
+  .skill-cell ul{list-style:none; margin:0; padding:5; font-size:0.92rem; color:var(--ink-soft);}
+  .skill-cell li{padding:4px 0;}
+
+  /* PROJECTS */
+  .project{
+    display:grid; grid-template-columns:64px 1fr; gap:20px;
+    padding:32px 0; border-bottom:1px solid var(--line);
+  }
+  .project:first-of-type{border-top:1px solid var(--line);}
+  .project .idx{font-family:'JetBrains Mono', monospace; color:var(--ink-soft); font-size:0.9rem; padding-top:4px;}
+  .project h3{font-size:1.28rem; margin-bottom:8px;}
+  .project .desc{color:var(--ink-soft); max-width:64ch; margin-bottom:14px;}
+  .project .meta{display:flex; gap:16px; flex-wrap:wrap; align-items:center;}
+  .metric{
+    font-family:'JetBrains Mono', monospace; font-size:0.85rem;
+    color:var(--teal); border:1px solid var(--teal); border-radius:2px;
+    padding:3px 9px;
+  }
+  .tags{display:flex; gap:8px; flex-wrap:wrap;}
+  .tags span{
+    font-size:0.78rem; color:var(--ink-soft); background:var(--paper-2);
+    padding:3px 9px; border-radius:2px;
+  }
+
+  /* EDUCATION / EXPERIENCE */
+  .timeline{border-left:1px solid var(--line); padding-left:24px; margin-left:4px;}
+  .tl-item{position:relative; padding-bottom:30px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:''; position:absolute; left:-29px; top:5px; width:9px; height:9px;
+    border-radius:50%; background:var(--amber);
+  }
+  .tl-item .when{font-family:'JetBrains Mono', monospace; font-size:0.8rem; color:var(--ink-soft); display:block; margin-bottom:4px;}
+  .tl-item h3{font-size:1.05rem;}
+  .tl-item p{color:var(--ink-soft); margin:6px 0 0; max-width:58ch; font-size:0.94rem;}
+
+  /* CONTACT */
+  .contact{
+    background:var(--ink); color:var(--paper); border-radius:2px;
+    padding:56px 40px; text-align:left;
+  }
+  .contact h2{color:var(--paper); font-size:1.7rem; max-width:27ch;}
+  .contact p{color:color-mix(in srgb, var(--paper) 70%, transparent); margin-top:12px; max-width:150ch;}
+  .contact .links{display:flex; gap:14px; margin-top:28px; flex-wrap:wrap;}
+  .contact .links a{
+    border:1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+    padding:10px 18px; border-radius:2px; text-decoration:none; font-size:0.92rem;
+  }
+  .contact .links a:hover{border-color:var(--amber); color:var(--amber);}
+
+  footer{padding:28px 0 48px; text-align:center; font-size:0.82rem; color:var(--ink-soft);}
+
+  :focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">Vengateswaran <span>J</span></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">dark/light</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="tag mono">Data Science · Machine Learning · Generative AI</span>
+    <h2>I like to build data-driven applications using Python, Machine Learning, and Generative AI to solve real-world problems and create meaningful solutions.</h2>
+    <p class="lede">Aspiring Data Scientist with hands-on experience in Machine Learning, Data Analytics, and Generative AI. I build data-driven applications using Python, from customer churn prediction and segmentation to enterprise RAG applications powered by LLMs. Based in Madurai, India, I am seeking opportunities in Data Science and GenAI engineering where I can apply my skills, solve real-world problems, and continue learning and growing with a global organization.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#work">See the work</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><b>RAG</b><span>production-style pipeline</span></div>
+      <div class="stat"><b>Customer Churn</b><span>F1 on churn model</span></div>
+      <div class="stat"><b>Salse Forecasting</b><span>features in forecasting model</span></div>
+      <div class="stat"><b>Sentiment Analysis</b><span>Classifies text sentiment</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head"><h2>About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>Postgraduate in Computer Science with a strong foundation in Python, SQL, Data Analytics, Machine Learning, and Generative AI. Hands-on experience through academic and personal projects involving data processing, machine learning, and enterprise RAG applications using technologies such as FastAPI, LangChain, FAISS, and LLMs.</p>
+        <p>Completed a Data Science course and continuously developing practical skills by building real-world technology projects. A quick learner with strong analytical and problem-solving abilities, currently looking for an opportunity with a global organization where I can apply my skills, learn new technologies, contribute to business goals, and grow professionally.</p>
+      </div>
+      <div class="fact-list">
+        <div><span>Location</span><span>Madurai, Tamil Nadu, IN</span></div>
+        <div><span>Focus</span><span>Data Science / GenAI</span></div>
+        <div><span>Status</span><span>Open to work</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><h2>Skills</h2><span class="count mono">6 areas</span></div>
+    <div class="skill-groups">
+      <div class="skill-cell">
+        <h3>Programming Language</h3>
+        <ul style="list-style-type: circle;"><li>Python</li><li>SQL</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Data Science &amp; Analytics</h3>
+        <ul style="list-style-type: circle;"><li>EDA &amp; data cleaning</li><li>Feature engineering</li><li>Statistical analysis</li><li>Predictive modeling</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>ML Libraries</h3>
+        <ul style="list-style-type: circle;"><li>Pandas · NumPy</li><li>Scikit-learn</li><li>Matplotlib · Seaborn</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Gen AI &amp; LLM</h3>
+        <ul style="list-style-type: circle;"><li>LangChain · LangGraph</li><li>RAG · FAISS</li><li>Prompt engineering</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Backend</h3>
+        <ul style="list-style-type: circle;"><li>FastAPI · Flask</li><li>REST APIs</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Tools</h3>
+        <ul style="list-style-type: circle;"><li>Git · GitHub</li><li>Jupyter · Colab</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head"><h2>Selected work</h2><span class="count mono">2025 – 2026</span></div>
+
+    <div class="project">
+      <div class="idx mono">01</div>
+      <div>
+        <h3>Enterprise Document Q&amp;A System (RAG)</h3>
+        <p class="desc">Upload documents and ask questions in plain language. Handles chunking, vector embeddings, and semantic retrieval, then grounds LLM answers in the source text with citations.</p>
+        <div class="meta">
+          <span class="metric">source-cited answers</span>
+          <div class="tags"><span>FastAPI</span><span>LangChain</span><span>FAISS</span><span>Streamlit</span><span>Vector embeddings</span><span>Prompt engineering</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="idx mono">02</div>
+      <div>
+        <h3>Customer Churn Prediction &amp; Retention Analytics</h3>
+        <p class="desc">Identifies customers likely to leave, from raw behavioral data through to a trained classifier — including segmentation and retention-focused analysis for the customers flagged at risk.</p>
+        <div class="meta">
+          <span class="metric">~85% F1 score</span>
+          <div class="tags"><span>Pandas</span><span>Scikit-learn</span><span>Feature engineering</span><span>EDA</span><span>Customer segmentation</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="idx mono">03</div>
+      <div>
+        <h3>Sales Forecasting</h3>
+        <p class="desc">Cleaned and modeled historical sales data — handling duplicates, missing values and outliers — then compared multiple models to forecast future sales and 30-day trends.</p>
+        <div class="meta">
+          <span class="metric">25+ features compared</span>
+          <div class="tags"><span>Python</span><span>Time-series</span><span>Model comparison</span><span>Outlier analysis</span><span>Data preprocessing</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="idx mono">04</div>
+      <div>
+        <h3>Sentiment Analysis</h3>
+        <p class="desc">Classifies text sentiment using transformer-based models, covering the full NLP pipeline from tokenization to fine-tuned classification.</p>
+        <div class="meta">
+          <span class="metric">transformer-based</span>
+          <div class="tags"><span>NLP</span><span>BERT</span><span>Tokenization</span><span>Transformer models</span><span>Text classification</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="background">
+  <div class="wrap">
+    <div class="section-head"><h2>Education &amp; experience</h2></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="when mono">2026</span>
+        <h3>MSc Computer Science — Ultra Arts and Science College</h3>
+        <p>Postgraduate studies, completed May 2026.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when mono">2025</span>
+        <h3>Full-Stack Development Intern — MERN Solutions</h3>
+        <p>Built and shipped web applications end-to-end, working across frontend and backend fundamentals to support data-driven features.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when mono">2024</span>
+        <h3>Data Science Course — Edureka Learning Center</h3>
+        <p>Python, SQL, Excel, data cleaning &amp; preprocessing, feature engineering, and ML fundamentals.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when mono">2023</span>
+        <h3>BSc Computer Science</h3>
+        <p>Bachelor's degree, completed 2023.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <h2>Let's build something with data.</h2>
+      <p>Open to data analyst, data scientist, and GenAI/LLM roles apply my skills, contribute to real-world AI solutions, and continue learning from experienced professionals while growing my career. Based in Madurai, happy to work remote.</p>
+      <div class="links">
+        <a href="vengateswaran.j7002@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/vengateswaran-data-scientist/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Vengateswara" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Vengateswaran J. — built with data, one model at a time.</footer>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  toggle.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme');
+    root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+  });
+</script>
+
+</body>
+</html>
